@@ -32,11 +32,12 @@ public class ValidParanthesis_70 {
 		if(s.length() % 2 != 0)
 			return false;
 		
-		// loop through all the chars and push (, [, { in  to stack first
 		for(Character c : s.toCharArray()) {
+			// loop through all the chars and push (, [, { in  to stack first
 			if(isOneOfOpeningBraces(c))
 				container.push(c);
 			
+			// if we encountered closing bracket, start process the stack 
 			if(isOneOfClosingBraces(c)){
 				if(container.isEmpty())
 					return false;
