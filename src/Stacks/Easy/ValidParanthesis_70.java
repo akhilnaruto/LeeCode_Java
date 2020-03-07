@@ -1,5 +1,6 @@
 package Stacks.Easy;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 /*
@@ -18,6 +19,11 @@ public class ValidParanthesis_70 {
 
 	// my solution
 	public boolean isValid(String s) {
+		HashMap<Character, Character> matchingParanthesis = new HashMap<>();
+		matchingParanthesis.put(')', '(');
+		matchingParanthesis.put(']', '[');
+		matchingParanthesis.put('}', '{');
+		
 		Stack<Character> container = new Stack<Character>();
 		
 		if(s.length() == 0)
@@ -28,31 +34,29 @@ public class ValidParanthesis_70 {
 		
 		// loop through all the chars and push (, [, { in  to stack first
 		for(Character c : s.toCharArray()) {
-			if(c.equals('(') || c.equals('[') || c.equals('{'))
+			if(isOneOfOpeningBraces(c))
 				container.push(c);
 			
-			if(c.equals(')') || c.equals(']') || c.equals('}')){
+			if(isOneOfClosingBraces(c)){
 				if(container.isEmpty())
 					return false;
-				if(c.equals(')')){
-					Character res = container.pop();
-					if(res != ('('))
-						return false;
-				}
-				if(c.equals(']')){
-					Character res = container.pop();
-					if(res != ('['))
-						return false;
-				}
-				if(c.equals('}')){
-					Character res = container.pop();
-					if(res != ('{'))
-						return false;
-				}
+				
+				Character expectedOpeningParanthesis = matchingParanthesis.get(c);
+				Character openeningParanthesis = container.pop();
+				if(!expectedOpeningParanthesis.equals(openeningParanthesis))
+					return false;
 			}
 		}
 		return container.isEmpty();
 
+	}
+	
+	private boolean isOneOfOpeningBraces(Character c) {
+		return c.equals('(') || c.equals('[') || c.equals('{');
+	}
+	
+	private boolean  isOneOfClosingBraces(Character c) {
+		return c.equals(')') || c.equals(']') || c.equals('}');
 	}
 	
 	public static void main(String[] args) {
