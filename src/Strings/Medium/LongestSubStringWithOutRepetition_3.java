@@ -28,7 +28,7 @@ public class LongestSubStringWithOutRepetition_3 {
 	}
 
 	public static void main(String[] args) {
-          int result = new LongestSubStringWithOutRepetition_3().lengthOfLongestSubstring("abcdee");
+          int result = new LongestSubStringWithOutRepetition_3().lengthOfLongestSubstring("abedec");
           System.out.print(result);
 	}
 }
