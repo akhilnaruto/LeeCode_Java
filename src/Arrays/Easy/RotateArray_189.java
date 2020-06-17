@@ -36,7 +36,7 @@ public class RotateArray_189 {
 
     public void rotate(int[] nums, int k) {
         int length = nums.length;
-        k =  nums.length % k;
+        k =  k > nums.length ? k - nums.length : k;
         reverseArray(0, length-1, nums);
         reverseArray(0, k-1, nums);
         reverseArray(k, length-1, nums);
